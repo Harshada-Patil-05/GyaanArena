@@ -7,7 +7,6 @@ import { Badge } from "@/components/ui/badge";
 import ChapterView from "@/components/ChapterView";
 import QuizGame from "@/components/QuizGame";
 import MindPlayHub from "@/components/MindPlayHub";
-import logoImage from "/image.png";
 import {
   BookOpen,
   Trophy,
@@ -183,17 +182,7 @@ const StudentDashboard = () => {
   return (
     <Layout>
       <div className="container mx-auto px-4 py-8">
-        {/* Logo Section */}
-        <div className="flex justify-center mb-6">
-          <div className="w-16 h-16 rounded-full bg-white/95 shadow-lg border-2 border-white/50 flex items-center justify-center hover:scale-105 smooth-transition backdrop-blur-sm">
-            <img
-              src={logoImage}
-              alt="Gyaan Arena Logo"
-              className="w-12 h-12 object-contain drop-shadow-sm"
-            />
-          </div>
-        </div>
-
+        
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
