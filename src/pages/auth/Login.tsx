@@ -1,25 +1,39 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, Eye, EyeOff, Mail, Lock } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { BookOpen, Eye, EyeOff, User, Lock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSelector from "@/components/LanguageSelector";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState(""); // changed from email → username
   const [password, setPassword] = useState("");
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement authentication with Supabase
-    console.log("Login attempt:", { email, password });
-    // For now, redirect to dashboard
-    window.location.href = "/dashboard";  
+
+    if (username === "student" && password === "1234") {
+      localStorage.setItem("isLoggedIn", "student");
+      navigate("/dashboard");
+    } else if (username === "teacher" && password === "5678") {
+      localStorage.setItem("isLoggedIn", "teacher");
+      navigate("/teacher-dashboard");
+    } else {
+      alert("Invalid credentials!");
+    }
   };
 
   return (
@@ -28,7 +42,7 @@ const Login = () => {
       <div className="absolute top-4 right-4 z-10">
         <LanguageSelector />
       </div>
-      
+
       <div className="w-full max-w-md animate-scale-in">
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center space-x-3 mb-4">
@@ -39,7 +53,9 @@ const Login = () => {
               {t("hero.brand")}
             </span>
           </Link>
-          <h1 className="text-2xl font-bold text-foreground mb-2">{t("auth.welcome_back")}</h1>
+          <h1 className="text-2xl font-bold text-foreground mb-2">
+            {t("auth.welcome_back")}
+          </h1>
           <p className="text-muted-foreground">{t("auth.sign_in_description")}</p>
         </div>
 
@@ -47,28 +63,36 @@ const Login = () => {
           <CardHeader className="text-center">
             <CardTitle className="text-xl">{t("auth.sign_in")}</CardTitle>
             <CardDescription>
-              {t("auth.sign_in_cta")}
+              For default login use following:
+              <br />
+              <strong>Student:</strong> username = <code>student</code>, password ={" "}
+              <code>1234</code>
+              <br />
+              <strong>Teacher:</strong> username = <code>teacher</code>, password ={" "}
+              <code>5678</code>
             </CardDescription>
           </CardHeader>
-          
+
           <form onSubmit={handleLogin}>
             <CardContent className="space-y-4">
+              {/* Username Field */}
               <div className="space-y-2">
-                <Label htmlFor="email">{t("auth.email")}</Label>
+                <Label htmlFor="username">{t("auth.username")}</Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
-                    id="email"
-                    type="email"
-                    placeholder="student@example.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    id="username"
+                    type="text"
+                    placeholder="Enter your username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     className="pl-10"
                     required
                   />
                 </div>
               </div>
-              
+
+              {/* Password Field */}
               <div className="space-y-2">
                 <Label htmlFor="password">{t("auth.password")}</Label>
                 <div className="relative">
@@ -91,39 +115,16 @@ const Login = () => {
                   </button>
                 </div>
               </div>
-              
-              <div className="flex items-center justify-between text-sm">
-                <label className="flex items-center space-x-2 cursor-pointer">
-                  <input type="checkbox" className="rounded border-border" />
-                  <span className="text-muted-foreground">{t("auth.remember_me")}</span>
-                </label>
-                <Link 
-                  to="/auth/forgot-password" 
-                  className="text-primary hover:text-primary/80 font-medium"
-                >
-                  {t("auth.forgot_password")}
-                </Link>
-              </div>
             </CardContent>
-            
+
             <CardFooter className="flex flex-col space-y-4">
-              <Button type="submit" className="w-full" variant="student" size="lg">
+              <Button type="submit" className="w-full" size="lg">
                 {t("auth.sign_in")}
               </Button>
-              
-              <div className="text-center text-sm text-muted-foreground">
-                {t("auth.no_account")}{" "}
-                <Link 
-                  to="/auth/signup" 
-                  className="text-primary hover:text-primary/80 font-medium"
-                >
-                  {t("auth.sign_up_here")}
-                </Link>
-              </div>
-              
+
               <div className="text-center">
-                <Link 
-                  to="/" 
+                <Link
+                  to="/"
                   className="text-sm text-muted-foreground hover:text-foreground"
                 >
                   {t("auth.back_to_home")}
