@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import ChapterView from "@/components/ChapterView";
 import QuizGame from "@/components/QuizGame";
 import MindPlayHub from "@/components/MindPlayHub";
-import logoImage from "@/assets/logo-gyaan-arena.jpg";
+import logoImage from "/image.png";
 import {
   BookOpen,
   Trophy,
