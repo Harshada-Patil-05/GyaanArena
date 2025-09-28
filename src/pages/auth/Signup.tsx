@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import logoImage from "@/assets/logo-gyaan-arena.png";
 import {
   Card,
   CardContent,
@@ -73,8 +74,12 @@ const Signup = () => {
       <div className="w-full max-w-md animate-scale-in">
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center space-x-3 mb-4">
-            <div className="w-12 h-12 hero-gradient rounded-xl flex items-center justify-center shadow-lg">
-              <BookOpen className="w-7 h-7 text-white" />
+            <div className="w-14 h-14 rounded-full bg-white/95 border-2 border-white/50 flex items-center justify-center hover:scale-105 smooth-transition">
+              <img
+                src={logoImage}
+                alt="Gyaan Arena Logo"
+                className="w-14 h-14 object-contain drop-shadow-sm z-50 rounded-full"
+              />
             </div>
             <span className="text-3xl font-bold bg-gradient-to-r from-primary via-secondary-accent to-primary bg-clip-text text-transparent drop-shadow-sm">
               {t("hero.brand")}
@@ -220,7 +225,7 @@ const Signup = () => {
 
               <div className="text-center text-sm text-muted-foreground">
                 {t("auth.have_account")}{" "}
-                <Link to="/login" className="text-primary hover:text-primary/80 font-medium">
+                <Link to="/auth/login" className="text-primary hover:text-primary/80 font-medium">
                   {t("auth.sign_in_here")}
                 </Link>
               </div>
