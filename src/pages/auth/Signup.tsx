@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,6 +11,7 @@ import LanguageSelector from "@/components/LanguageSelector";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -34,9 +35,14 @@ const Signup = () => {
       return;
     }
     
-    // For now, redirect to appropriate dashboard
-    const redirectPath = formData.role === "teacher" ? "/teacher-dashboard" : "/dashboard";
-    window.location.href = redirectPath;
+    if (formData.role === "teacher") {
+      navigate("/teacher-dashboard");
+      localStorage.setItem("isLoggedIn", "teacher");
+    }
+    else {
+      navigate("/dashboard");
+      localStorage.setItem("isLoggedIn", "student");
+    }
   };
 
   return (
