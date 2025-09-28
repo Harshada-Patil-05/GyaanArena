@@ -95,7 +95,7 @@ const Layout = ({ children, showNavigation = true }: LayoutProps) => {
                 </Button>
               </div>
 
-              {/* Mobile menu button */}
+              {/* Mobile menu button */}{/* Mobile menu button */}
               <div className="md:hidden">
                 <Button
                   variant="ghost"
