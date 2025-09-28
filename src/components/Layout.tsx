@@ -91,7 +91,9 @@ const Layout = ({ children, showNavigation = true }: LayoutProps) => {
                 </Button>
                 <Button variant="outline" size="sm">
                   <LogOut className="w-4 h-4 mr-2" />
-                  {t("nav.logout")}
+                    <Link to="/">
+                      { t("nav.logout")}
+                    </Link>
                 </Button>
               </div>
 
