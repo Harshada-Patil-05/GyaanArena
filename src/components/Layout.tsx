@@ -54,8 +54,8 @@ const Layout = ({ children, showNavigation = true }: LayoutProps) => {
                     />
                   </div>
                 </div>
-                <span className="text-2xl font-bold text-foreground">
-                  Gyaan Arena
+                <span className="text-3xl font-bold bg-gradient-to-r from-primary via-secondary-accent to-primary bg-clip-text text-transparent drop-shadow-sm">
+                  {t("hero.brand")}
                 </span>
               </Link>
 
