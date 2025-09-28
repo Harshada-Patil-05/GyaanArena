@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSelector from "@/components/LanguageSelector";
+import logoImage from "@/assets/logo-gyaan-arena.png";
+
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -42,8 +44,15 @@ const Layout = ({ children, showNavigation = true }: LayoutProps) => {
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
               <Link to="/" className="flex items-center space-x-3">
-                <div className="w-10 h-10 hero-gradient rounded-xl flex items-center justify-center">
-                  <BookOpen className="w-6 h-6 text-white" />
+                {/* Logo Section */}
+                <div className="flex justify-center">
+                  <div className="w-12 h-12 rounded-full bg-white/95 border-2 border-white/50 flex items-center justify-center hover:scale-105 smooth-transition">
+                    <img
+                      src={logoImage}
+                      alt="Gyaan Arena Logo"
+                      className="w-12 h-12 object-contain drop-shadow-sm z-50"
+                    />
+                  </div>
                 </div>
                 <span className="text-2xl font-bold text-foreground">
                   Gyaan Arena
