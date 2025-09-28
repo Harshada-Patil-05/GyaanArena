@@ -3,9 +3,30 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { BookOpen, Eye, EyeOff, Mail, Lock, User, GraduationCap } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  BookOpen,
+  Eye,
+  EyeOff,
+  Mail,
+  Lock,
+  User,
+  GraduationCap,
+} from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSelector from "@/components/LanguageSelector";
 
@@ -22,26 +43,23 @@ const Signup = () => {
   const { t } = useLanguage();
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement authentication with Supabase
-    console.log("Signup attempt:", formData);
-    
+
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
-    
+
     if (formData.role === "teacher") {
-      navigate("/teacher-dashboard");
       localStorage.setItem("isLoggedIn", "teacher");
-    }
-    else {
-      navigate("/dashboard");
+      navigate("/teacher-dashboard");
+    } else {
       localStorage.setItem("isLoggedIn", "student");
+      navigate("/dashboard");
     }
   };
 
@@ -51,7 +69,7 @@ const Signup = () => {
       <div className="absolute top-4 right-4 z-10">
         <LanguageSelector />
       </div>
-      
+
       <div className="w-full max-w-md animate-scale-in">
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center space-x-3 mb-4">
@@ -62,20 +80,23 @@ const Signup = () => {
               {t("hero.brand")}
             </span>
           </Link>
-          <h1 className="text-2xl font-bold text-foreground mb-2">{t("auth.join_brand")}</h1>
-          <p className="text-muted-foreground">{t("auth.create_account_description")}</p>
+          <h1 className="text-2xl font-bold text-foreground mb-2">
+            {t("auth.join_brand")}
+          </h1>
+          <p className="text-muted-foreground">
+            {t("auth.create_account_description")}
+          </p>
         </div>
 
         <Card className="card-gradient">
           <CardHeader className="text-center">
             <CardTitle className="text-xl">{t("auth.create_account")}</CardTitle>
-            <CardDescription>
-              {t("auth.create_account_cta")}
-            </CardDescription>
+            <CardDescription>{t("auth.create_account_cta")}</CardDescription>
           </CardHeader>
-          
+
           <form onSubmit={handleSignup}>
             <CardContent className="space-y-4">
+              {/* Full name */}
               <div className="space-y-2">
                 <Label htmlFor="fullName">{t("auth.full_name")}</Label>
                 <div className="relative">
@@ -92,6 +113,7 @@ const Signup = () => {
                 </div>
               </div>
 
+              {/* Email */}
               <div className="space-y-2">
                 <Label htmlFor="email">{t("auth.email")}</Label>
                 <div className="relative">
@@ -108,11 +130,15 @@ const Signup = () => {
                 </div>
               </div>
 
+              {/* Role */}
               <div className="space-y-2">
                 <Label htmlFor="role">{t("auth.role")}</Label>
                 <div className="relative">
                   <GraduationCap className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground z-10" />
-                  <Select onValueChange={(value) => handleInputChange("role", value)} required>
+                  <Select
+                    onValueChange={(value) => handleInputChange("role", value)}
+                    required
+                  >
                     <SelectTrigger className="pl-10">
                       <SelectValue placeholder={t("auth.role_placeholder")} />
                     </SelectTrigger>
@@ -123,7 +149,8 @@ const Signup = () => {
                   </Select>
                 </div>
               </div>
-              
+
+              {/* Password */}
               <div className="space-y-2">
                 <Label htmlFor="password">{t("auth.password")}</Label>
                 <div className="relative">
@@ -142,11 +169,16 @@ const Signup = () => {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
                   >
-                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    {showPassword ? (
+                      <EyeOff className="w-4 h-4" />
+                    ) : (
+                      <Eye className="w-4 h-4" />
+                    )}
                   </button>
                 </div>
               </div>
 
+              {/* Confirm password */}
               <div className="space-y-2">
                 <Label htmlFor="confirmPassword">{t("auth.confirm_password")}</Label>
                 <div className="relative">
@@ -156,13 +188,16 @@ const Signup = () => {
                     type="password"
                     placeholder="Confirm your password"
                     value={formData.confirmPassword}
-                    onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("confirmPassword", e.target.value)
+                    }
                     className="pl-10"
                     required
                   />
                 </div>
               </div>
-              
+
+              {/* Terms checkbox */}
               <div className="flex items-start space-x-2 text-sm">
                 <input type="checkbox" className="mt-0.5 rounded border-border" required />
                 <span className="text-muted-foreground">
@@ -177,27 +212,21 @@ const Signup = () => {
                 </span>
               </div>
             </CardContent>
-            
+
             <CardFooter className="flex flex-col space-y-4">
               <Button type="submit" className="w-full" variant="student" size="lg">
                 {t("auth.create_account")}
               </Button>
-              
+
               <div className="text-center text-sm text-muted-foreground">
                 {t("auth.have_account")}{" "}
-                <Link 
-                  to="/auth/login" 
-                  className="text-primary hover:text-primary/80 font-medium"
-                >
+                <Link to="/login" className="text-primary hover:text-primary/80 font-medium">
                   {t("auth.sign_in_here")}
                 </Link>
               </div>
-              
+
               <div className="text-center">
-                <Link 
-                  to="/" 
-                  className="text-sm text-muted-foreground hover:text-foreground"
-                >
+                <Link to="/" className="text-sm text-muted-foreground hover:text-foreground">
                   {t("auth.back_to_home")}
                 </Link>
               </div>
