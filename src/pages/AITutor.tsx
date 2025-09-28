@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Send, MessageCircle, Mic, MicOff, BookOpen, HelpCircle, Target } from 'lucide-react';
+import { Send, MessageCircle, Mic, MicOff, Brain, HelpCircle, Target } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -319,8 +319,8 @@ const AITutor = () => {
         <div className="p-4 border-b bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg">
-                <BookOpen className="w-6 h-6 text-white" />
+              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-secondary-accent/20 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 smooth-transition`}>
+                <Brain className={`w-8 h-8 ${"text-purple-500"}`} />
               </div>
               <div>
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
