@@ -1,6 +1,4 @@
-# Welcome to your Lovable project
-
-## Project info
+# Welcome to Gyaan Arena
 
 
 ## How can I edit this code?
