@@ -86,6 +86,7 @@ const translations = {
     'auth.no_account': 'Don\'t have an account?',
     'auth.sign_up_here': 'Sign up here',
     'auth.back_to_home': '← Back to Home',
+    'auth.username': 'Username',
     
     'auth.join_brand': 'Join Gyaan Arena',
     'auth.create_account_description': 'Create your account and start learning today',
@@ -148,6 +149,7 @@ const translations = {
     'auth.no_account': 'खाता नहीं है?',
     'auth.sign_up_here': 'यहाँ साइन अप करें',
     'auth.back_to_home': '← होम पर वापस',
+    'auth.username': 'उपयोगकर्ता नाम',
     
     'auth.join_brand': 'ज्ञान अरेना में शामिल हों',
     'auth.create_account_description': 'अपना खाता बनाएं और आज ही सीखना शुरू करें',
@@ -210,6 +212,7 @@ const translations = {
     'auth.no_account': 'खाते नाही?',
     'auth.sign_up_here': 'येथे साइन अप करा',
     'auth.back_to_home': '← होमवर परत',
+    'auth.username': 'वापरकर्ता नाव',
     
     'auth.join_brand': 'ज्ञान अरेना मध्ये सामील व्हा',
     'auth.create_account_description': 'आपले खाते तयार करा आणि आज शिकणे सुरू करा',
@@ -272,6 +275,7 @@ const translations = {
     'auth.no_account': 'ଖାତା ନାହିଁ?',
     'auth.sign_up_here': 'ଏଠାରେ ସାଇନ୍ ଅପ୍ କରନ୍ତୁ',
     'auth.back_to_home': '← ହୋମକୁ ଫେରନ୍ତୁ',
+    'auth.username': 'ଉପଯୋଗକର୍ତ୍ତାନାମ',
     
     'auth.join_brand': 'ଗ୍ୟାନ ଆରେନାରେ ଯୋଗ ଦିଅନ୍ତୁ',
     'auth.create_account_description': 'ଆପଣଙ୍କର ଖାତା ସୃଷ୍ଟି କରନ୍ତୁ ଏବଂ ଆଜି ଶିକ୍ଷଣ ଆରମ୍ଭ କରନ୍ତୁ',
