@@ -50,7 +50,7 @@ const Layout = ({ children, showNavigation = true }: LayoutProps) => {
                     <img
                       src={logoImage}
                       alt="Gyaan Arena Logo"
-                      className="w-12 h-12 object-contain drop-shadow-sm z-50"
+                      className="w-12 h-12 object-contain drop-shadow-sm z-50 rounded-full"
                     />
                   </div>
                 </div>
