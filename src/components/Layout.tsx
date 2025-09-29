@@ -29,7 +29,7 @@ const Layout = ({ children, showNavigation = true }: LayoutProps) => {
 
   const isActive = (path: string) => location.pathname === path;
 
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const isLoggedIn = localStorage.getItem("isLoggedIn")==="true";
   const role = localStorage.getItem("role");
 
   const dashboardPath = 
