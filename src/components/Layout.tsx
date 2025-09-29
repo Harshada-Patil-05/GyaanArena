@@ -92,10 +92,10 @@ const Landing = () => {
                   variant="outline"
                   className="bg-white/10 border-white/20 text-white hover:bg-white/20"
                 >
-                  <Link to="https://www.youtube.com/watch?v=ndDpjT0_IM0">
+                  <a href="https://www.youtube.com/watch?v=ndDpjT0_IM0" target="_blank" rel="noopener noreferrer">
                     <Play className="w-5 h-5 mr-2" />
                     {t("hero.watch_demo")}
-                  </Link>
+                  </a>
                 </Button>
               </div>
             </div>
