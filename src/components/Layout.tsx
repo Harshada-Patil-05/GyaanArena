@@ -90,9 +90,9 @@ const Layout = ({ children, showNavigation = true }: LayoutProps) => {
                   <User className="w-4 h-4" />
                 </Button>
                 <Link to="/">
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="sm" onClick="localStorage.removeItem('isLoggedIn')">
                     <LogOut className="w-4 h-4 mr-2" />
-                      { t("nav.logout")}
+                      { t("nav.logout") }
                 </Button>
                 </Link>
               </div>
@@ -141,7 +141,7 @@ const Layout = ({ children, showNavigation = true }: LayoutProps) => {
                     <LanguageSelector />
                   </div>
                   <Link to="/">
-                    <Button variant="outline" className="w-full justify-start">
+                    <Button variant="outline" className="w-full justify-start" onClick="localStorage.removeItem('isLoggedIn')">
                       <LogOut className="w-4 h-4 mr-2" />
                       {t("nav.logout")}
                     </Button>
