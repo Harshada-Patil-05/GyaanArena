@@ -29,9 +29,19 @@ const Layout = ({ children, showNavigation = true }: LayoutProps) => {
 
   const isActive = (path: string) => location.pathname === path;
 
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const role = localStorage.getItem("role");
+
+  const dashboardPath = 
+  isLoggedIn
+    ? role === "student"
+      ? "/dashboard"
+      : "/teacher-dashboard"
+    : "/";
+
   const navigation = [
     { name: t("nav.home"), href: "/", icon: BookOpen },
-    { name: t("nav.dashboard"), href: localStorage.getItem("isLoggedIn")=="student" ? "/dashboard" : "/teacher-dashboard", icon: Users },
+    { name: t("nav.dashboard"), href: dashboardPath, icon: Users },
     { name: t("nav.leaderboard"), href: "/leaderboard", icon: Trophy },
     { name: t("nav.ai_tutor"), href: "/ai-tutor", icon: Brain },
   ];
