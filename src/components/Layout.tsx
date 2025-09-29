@@ -91,12 +91,10 @@ const Landing = () => {
                   size="xl"
                   variant="outline"
                   className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-                  asChild
+                  onClick={() => window.open("https://www.youtube.com/watch?v=ndDpjT0_IM0", "_blank")}
                 >
-                  <a href="https://www.youtube.com/watch?v=ndDpjT0_IM0" target="_blank" rel="noopener noreferrer">
-                    <Play className="w-5 h-5 mr-2" />
-                    {t("hero.watch_demo")}
-                  </a>
+                  <Play className="w-5 h-5 mr-2" />
+                  {t("hero.watch_demo")}
                 </Button>
               </div>
             </div>
