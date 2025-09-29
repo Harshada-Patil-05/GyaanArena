@@ -31,7 +31,7 @@ const Layout = ({ children, showNavigation = true }: LayoutProps) => {
 
   const navigation = [
     { name: t("nav.home"), href: "/", icon: BookOpen },
-    { name: t("nav.dashboard"), href: {localStorage.getItem("isLoggedIn")=="student" ? "/dashboard" : "/teacher-dashboard"}, icon: Users },
+    { name: t("nav.dashboard"), href: localStorage.getItem("isLoggedIn")=="student" ? "/dashboard" : "/teacher-dashboard", icon: Users },
     { name: t("nav.leaderboard"), href: "/leaderboard", icon: Trophy },
     { name: t("nav.ai_tutor"), href: "/ai-tutor", icon: Brain },
   ];
