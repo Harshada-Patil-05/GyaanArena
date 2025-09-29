@@ -94,7 +94,7 @@ const Landing = () => {
                   onClick={() => {
                     // SSR-safe check
                     if (typeof window !== "undefined") {
-                      void window.open("https://www.youtube.com/watch?v=ndDpjT0_IM0", "_blank");
+                      void window.open("https://youtu.be/1ElM_UQegeI?si=sBHUs-0h6pBxVzGY", "_blank");
                     }
                   }}
                 >
