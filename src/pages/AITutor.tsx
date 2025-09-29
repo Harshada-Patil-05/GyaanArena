@@ -216,7 +216,7 @@ const AITutor = () => {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: "I apologize, but I'm having trouble connecting to the AI service. Please check that your VITE_GEMINI_API_KEY is properly configured and try again.",
+        content: "I apologize, but I'm having trouble connecting to the AI service. Please try again later.",
         timestamp: new Date(),
         type: 'normal'
       };
