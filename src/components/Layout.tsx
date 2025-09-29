@@ -89,12 +89,12 @@ const Layout = ({ children, showNavigation = true }: LayoutProps) => {
                 <Button variant="ghost" size="icon">
                   <User className="w-4 h-4" />
                 </Button>
-                <Button variant="outline" size="sm">
-                  <LogOut className="w-4 h-4 mr-2" />
-                    <Link to="/">
+                <Link to="/">
+                  <Button variant="outline" size="sm">
+                    <LogOut className="w-4 h-4 mr-2" />
                       { t("nav.logout")}
-                    </Link>
                 </Button>
+                </Link>
               </div>
 
               {/* Mobile menu button */}
@@ -140,10 +140,12 @@ const Layout = ({ children, showNavigation = true }: LayoutProps) => {
                   <div className="px-3 py-2">
                     <LanguageSelector />
                   </div>
-                  <Button variant="outline" className="w-full justify-start">
-                    <LogOut className="w-4 h-4 mr-2" />
-                    {t("nav.logout")}
-                  </Button>
+                  <Link to="/">
+                    <Button variant="outline" className="w-full justify-start">
+                      <LogOut className="w-4 h-4 mr-2" />
+                      {t("nav.logout")}
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
