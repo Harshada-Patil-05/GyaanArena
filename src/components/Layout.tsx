@@ -91,7 +91,7 @@ const Landing = () => {
                   size="xl"
                   variant="outline"
                   className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-                  onClick={() => window.open("https://www.youtube.com/watch?v=ndDpjT0_IM0", "_blank")}
+                  onClick={() => { void window.open("https://www.youtube.com/watch?v=ndDpjT0_IM0", "_blank"); }}
                 >
                   <Play className="w-5 h-5 mr-2" />
                   {t("hero.watch_demo")}
