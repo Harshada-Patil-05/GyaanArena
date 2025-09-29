@@ -28,10 +28,12 @@ const Login = () => {
     e.preventDefault();
 
     if (username === "student" && password === "1234") {
-      localStorage.setItem("isLoggedIn", "student");
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("role", "student");
       navigate("/dashboard");
     } else if (username === "teacher" && password === "5678") {
-      localStorage.setItem("isLoggedIn", "teacher");
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("role", "teacher");
       navigate("/teacher-dashboard");
     } else {
       alert("Invalid credentials!");
