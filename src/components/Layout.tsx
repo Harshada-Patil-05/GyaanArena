@@ -1,198 +1,172 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import logo from "/image.png";
-
 import {
+  BookOpen,
   Trophy,
+  Users,
   Brain,
-  WifiOff,
-  Gamepad2,
-  Target,
-  Zap,
-  Star,
-  ArrowRight,
-  Play,
+  Menu,
+  X,
+  User,
+  LogOut,
+  Settings,
 } from "lucide-react";
-import heroImage from "@/assets/hero-learning.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSelector from "@/components/LanguageSelector";
+import logoImage from "@/assets/logo-gyaan-arena.png";
 
-const Landing = () => {
+
+interface LayoutProps {
+  children: React.ReactNode;
+  showNavigation?: boolean;
+}
+
+const Layout = ({ children, showNavigation = true }: LayoutProps) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
   const { t } = useLanguage();
 
-  const features = [
-    {
-      icon: Brain,
-      title: t("features.ai_learning"),
-      description: t("features.ai_description"),
-      color: "text-purple-500",
-    },
-    {
-      icon: WifiOff,
-      title: t("features.offline"),
-      description: t("features.offline_description"),
-      color: "text-orange-500",
-    },
-    {
-      icon: Gamepad2,
-      title: t("features.gamified"),
-      description: t("features.gamified_description"),
-      color: "text-blue-500",
-    },
-    {
-      icon: Target,
-      title: t("features.adaptive"),
-      description: t("features.adaptive_description"),
-      color: "text-green-500",
-    },
+  const isActive = (path: string) => location.pathname === path;
+
+  const isLoggedIn = localStorage.getItem("isLoggedIn")==="true";
+  const role = localStorage.getItem("role");
+
+  const dashboardPath = 
+  isLoggedIn
+    ? role === "student"
+      ? "/dashboard"
+      : "/teacher-dashboard"
+    : "/";
+
+  const navigation = [
+    { name: t("nav.home"), href: "/", icon: BookOpen },
+    { name: t("nav.dashboard"), href: dashboardPath, icon: Users },
+    { name: t("nav.leaderboard"), href: "/leaderboard", icon: Trophy },
+    { name: t("nav.ai_tutor"), href: "/ai-tutor", icon: Brain },
   ];
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        {/* Purple gradient background */}
-        <div className="absolute inset-0 hero-gradient opacity-90" />
-
-        {/* Logo - Top Left */}
-        <img
-          src={logo}
-          alt="Gyaan Arena Logo"
-          className="absolute top-6 left-6 h-20 w-20 rounded-full object-cover shadow-lg border-2 border-white z-50"
-        />
-
-        {/* Language Selector - Top Right */}
-        <div className="absolute top-4 right-4 z-50">
-          <LanguageSelector />
-        </div>
-
-        {/* Hero Content */}
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="text-center lg:text-left animate-slide-up">
-              <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-                {t("hero.title")}<br />
-                <span className="bg-gradient-to-r from-white via-primary-glow to-white bg-clip-text text-transparent font-extrabold drop-shadow-2xl animate-pulse-soft">
+      {showNavigation && (
+        <nav className="bg-card/80 backdrop-blur-sm border-b border-border sticky top-0 z-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between h-16">
+              {/* Logo */}
+              <Link to="/" className="flex items-center space-x-3">
+                {/* Logo Section */}
+                <div className="flex justify-center">
+                  <div className="w-12 h-12 rounded-full bg-white/95 border-2 border-white/50 flex items-center justify-center hover:scale-105 smooth-transition">
+                    <img
+                      src={logoImage}
+                      alt="Gyaan Arena Logo"
+                      className="w-12 h-12 object-contain drop-shadow-sm z-50 rounded-full"
+                    />
+                  </div>
+                </div>
+                <span className="text-3xl font-bold bg-gradient-to-r from-primary via-secondary-accent to-primary bg-clip-text text-transparent drop-shadow-sm">
                   {t("hero.brand")}
                 </span>
-              </h1>
-              <p className="text-xl text-white/90 mb-8 leading-relaxed">
-                {t("hero.description")}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Button size="xl" variant="hero" asChild>
-                  <Link to="/auth/signup">
-                    {t("hero.get_started")}
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
-                </Button>
-                <Button
-                  size="xl"
-                  variant="outline"
-                  className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-                  onClick={() => {
-                    // SSR-safe check
-                    if (typeof window !== "undefined") {
-                      void window.open("https://www.youtube.com/watch?v=ndDpjT0_IM0", "_blank");
-                    }
-                  }}
-                >
-                  <Play className="w-5 h-5 mr-2" />
-                  {t("hero.watch_demo")}
-                </Button>
-              </div>
-            </div>
-            <div className="relative animate-float">
-              <img
-                src={heroImage}
-                alt="Modern learning platform with students and digital interfaces"
-                className="rounded-2xl shadow-2xl w-full max-w-lg mx-auto"
-              />
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-success rounded-full flex items-center justify-center animate-pulse-soft">
-                <Trophy className="w-10 h-10 text-white" />
-              </div>
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-warning rounded-full flex items-center justify-center animate-pulse-soft">
-                <Star className="w-8 h-8 text-white" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-6">
-              {t("features.title")}
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              {t("features.subtitle")}
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <Card
-                  key={index}
-                  className="card-gradient hover:scale-105 smooth-transition group"
-                >
-                  <CardContent className="p-6 text-center">
-                    <div
-                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-secondary-accent/20 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 smooth-transition`}
-                    >
-                      <Icon className={`w-8 h-8 ${feature.color}`} />
-                    </div>
-                    <h3 className="text-xl font-semibold text-foreground mb-3">
-                      {feature.title}
-                    </h3>
-                    <p className="text-muted-foreground">
-                      {feature.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-24 hero-gradient">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
-            {t("cta.title")}
-          </h2>
-          <p className="text-xl text-white/90 mb-8">
-            {t("cta.description")}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="xl"
-              variant="outline"
-              className="border-2 border-white/40 text-white bg-white/10 hover:bg-white/20 hover:border-white hover:scale-105 smooth-transition backdrop-blur-sm shadow-lg hover:shadow-white/10 font-semibold"
-              asChild
-            >
-              <Link to="/auth/signup">
-                {t("cta.start_learning")}
-                <Zap className="w-5 h-5" />
               </Link>
-            </Button>
-            <Button
-              size="xl"
-              variant="outline"
-              className="border-2 border-white/40 text-white bg-white/10 hover:bg-white/20 hover:border-white hover:scale-105 smooth-transition backdrop-blur-sm shadow-lg hover:shadow-white/10 font-semibold"
-              asChild
-            >
-              <Link to="/auth/login">{t("cta.have_account")}</Link>
-            </Button>
+
+              {/* Desktop Navigation */}
+              <div className="hidden md:flex items-center space-x-8">
+                {navigation.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <Link
+                      key={item.name}
+                      to={item.href}
+                      className={`flex items-center space-x-2 px-3 py-2 rounded-lg smooth-transition ${
+                        isActive(item.href)
+                          ? "bg-primary/10 text-primary"
+                          : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                      }`}
+                    >
+                      <Icon className="w-4 h-4" />
+                      <span className="font-medium">{item.name}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              {/* User Menu */}
+              <div className="hidden md:flex items-center space-x-4">
+                <LanguageSelector />
+                <Button variant="ghost" size="icon">
+                  <Settings className="w-4 h-4" />
+                </Button>
+                <Button variant="ghost" size="icon">
+                  <User className="w-4 h-4" />
+                </Button>
+                <Link to="/">
+                  <Button variant="outline" size="sm" onClick="localStorage.removeItem('isLoggedIn')">
+                    <LogOut className="w-4 h-4 mr-2" />
+                      { t("nav.logout") }
+                </Button>
+                </Link>
+              </div>
+
+              {/* Mobile menu button */}
+              <div className="md:hidden">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                >
+                  {mobileMenuOpen ? (
+                    <X className="w-6 h-6" />
+                  ) : (
+                    <Menu className="w-6 h-6" />
+                  )}
+                </Button>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+
+          {/* Mobile Navigation */}
+          {mobileMenuOpen && (
+            <div className="md:hidden bg-card border-t border-border animate-slide-up">
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                {navigation.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <Link
+                      key={item.name}
+                      to={item.href}
+                      className={`flex items-center space-x-3 px-3 py-2 rounded-lg smooth-transition ${
+                        isActive(item.href)
+                          ? "bg-primary/10 text-primary"
+                          : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                      }`}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Icon className="w-5 h-5" />
+                      <span className="font-medium">{item.name}</span>
+                    </Link>
+                  );
+                })}
+                <div className="pt-4 mt-4 border-t border-border">
+                  <div className="px-3 py-2">
+                    <LanguageSelector />
+                  </div>
+                  <Link to="/">
+                    <Button variant="outline" className="w-full justify-start" onClick="localStorage.removeItem('isLoggedIn')">
+                      <LogOut className="w-4 h-4 mr-2" />
+                      {t("nav.logout")}
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
+        </nav>
+      )}
+
+      {/* Main Content */}
+      <main className="flex-1">{children}</main>
     </div>
   );
 };
 
-export default Landing;
+export default Layout;
