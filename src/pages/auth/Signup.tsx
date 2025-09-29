@@ -56,11 +56,11 @@ const Signup = () => {
     }
 
     if (formData.role === "teacher") {
-      localStorage.setItem("isLoggedIn", "teacher");
-      navigate("/teacher-dashboard");
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("role", "student");      navigate("/teacher-dashboard");
     } else {
-      localStorage.setItem("isLoggedIn", "student");
-      navigate("/dashboard");
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("role", "student");      navigate("/dashboard");
     }
   };
 
